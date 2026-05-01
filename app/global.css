@@ -148,3 +148,30 @@ table {
 .title {
   text-wrap: balance;
 }
+
+.route-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: black;
+  animation: fade-from-black 420ms ease both;
+}
+
+@keyframes fade-from-black {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-transition {
+    animation: none;
+    display: none;
+  }
+}

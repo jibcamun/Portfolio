@@ -5,6 +5,7 @@ type ProjectMetadata = {
   image: string
   title: string
   description: string
+  featured?: boolean
   github?: string
   link?: string
   custom?: string
@@ -29,7 +30,11 @@ function parseFrontmatter(fileContent: string) {
     let [key, ...valueArr] = line.split(': ')
     let value = valueArr.join(': ').trim()
     value = value.replace(/^['"](.*)['"]$/, '$1')
-    metadata[key.trim() as keyof ProjectMetadata] = value
+    let metadataKey = key.trim() as keyof ProjectMetadata
+
+    metadata[metadataKey] = (metadataKey === 'featured'
+      ? value === 'true'
+      : value) as never
   })
 
   return { metadata: metadata as ProjectMetadata, content }
