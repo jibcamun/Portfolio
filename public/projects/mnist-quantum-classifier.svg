@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">MNIST Quantum Classifier preview</title>
+  <desc id="desc">Hybrid quantum digit classifier with handwritten input, circuit gates, and class probabilities.</desc>
+  <rect width="1200" height="675" fill="#f8fafc"/>
+  <rect x="96" y="72" width="1008" height="531" rx="30" fill="#111827"/>
+  <rect x="144" y="126" width="300" height="423" rx="20" fill="#f9fafb"/>
+  <rect x="492" y="126" width="564" height="246" rx="18" fill="#ede9fe"/>
+  <rect x="492" y="414" width="564" height="135" rx="18" fill="#fee2e2"/>
+  <g fill="#111827">
+    <rect x="192" y="174" width="156" height="18" rx="9"/>
+    <rect x="192" y="468" width="174" height="14" rx="7" opacity=".5"/>
+    <rect x="192" y="504" width="132" height="14" rx="7" opacity=".35"/>
+  </g>
+  <rect x="198" y="246" width="192" height="192" rx="18" fill="#111827"/>
+  <path d="M276 288C324 288 354 318 354 363C354 404 324 438 276 438" fill="none" stroke="#f9fafb" stroke-width="24" stroke-linecap="round"/>
+  <path d="M492 249H444" stroke="#7c3aed" stroke-width="10" stroke-linecap="round"/>
+  <path d="M444 249H396" stroke="#7c3aed" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 20"/>
+  <g stroke="#111827" stroke-width="6" stroke-linecap="round">
+    <path d="M558 192H990"/>
+    <path d="M558 246H990"/>
+    <path d="M558 300H990"/>
+  </g>
+  <g fill="#f9fafb" stroke="#111827" stroke-width="6">
+    <rect x="612" y="168" width="48" height="48" rx="10"/>
+    <rect x="720" y="222" width="48" height="48" rx="10"/>
+    <rect x="828" y="276" width="48" height="48" rx="10"/>
+    <circle cx="936" cy="192" r="24"/>
+    <circle cx="936" cy="300" r="24"/>
+  </g>
+  <g fill="#111827" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">
+    <text x="636" y="201">H</text>
+    <text x="744" y="255">X</text>
+    <text x="852" y="309">R</text>
+  </g>
+  <path d="M936 216V276" stroke="#111827" stroke-width="6" stroke-linecap="round"/>
+  <g fill="#111827">
+    <rect x="540" y="456" width="84" height="18" rx="9"/>
+    <rect x="660" y="456" width="300" height="18" rx="9" opacity=".45"/>
+    <rect x="540" y="504" width="132" height="16" rx="8" opacity=".5"/>
+    <rect x="708" y="504" width="198" height="16" rx="8" opacity=".35"/>
+  </g>
+</svg>
