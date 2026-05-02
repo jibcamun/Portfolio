@@ -8,7 +8,7 @@ export default function Page() {
         Jibran Noorshah
       </h1>
       <p className="mb-4">
-        {`I'm Jibran Noorshah, a tech enthusiast and developer who finds unmatched glory in
+        {`I'm a tech enthusiast and developer who finds unmatched glory in
         reading research papers and getting lost in a pile of math problems.
         My newfound interest in pursuing AI/ML research and my nascent knowledge of 3D modelling and PCB design
         has led me to explore the intersection of software and hardware, and I'm excited to see where this journey takes me.
