@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">F1 Position Predictor preview</title>
+  <desc id="desc">Formula 1 machine learning dashboard with race track telemetry, predicted positions, and model signals.</desc>
+  <rect width="1200" height="675" fill="#f8fafc"/>
+  <rect x="96" y="72" width="1008" height="531" rx="30" fill="#111827"/>
+  <rect x="144" y="126" width="432" height="423" rx="20" fill="#f9fafb"/>
+  <rect x="624" y="126" width="432" height="186" rx="18" fill="#fee2e2"/>
+  <rect x="624" y="354" width="204" height="195" rx="18" fill="#dbeafe"/>
+  <rect x="852" y="354" width="204" height="195" rx="18" fill="#ccfbf1"/>
+
+  <g fill="#111827">
+    <rect x="192" y="174" width="246" height="18" rx="9"/>
+    <rect x="192" y="480" width="204" height="14" rx="7" opacity=".45"/>
+    <rect x="192" y="516" width="150" height="14" rx="7" opacity=".32"/>
+    <rect x="672" y="174" width="210" height="18" rx="9"/>
+    <rect x="672" y="408" width="72" height="16" rx="8"/>
+    <rect x="900" y="408" width="84" height="16" rx="8"/>
+  </g>
+
+  <path d="M309 248C383 209 483 249 489 328C496 418 373 454 304 428C238 403 213 326 260 278C273 264 289 258 309 248Z" fill="none" stroke="#111827" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M311 290C360 264 431 292 433 336C436 385 366 404 321 389C283 376 270 330 296 304C300 300 305 296 311 290Z" fill="none" stroke="#f9fafb" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M459 281L502 254" stroke="#ef4444" stroke-width="10" stroke-linecap="round"/>
+  <path d="M486 263L514 245" stroke="#f9fafb" stroke-width="10" stroke-linecap="round"/>
+
+  <g transform="translate(262 334)">
+    <path d="M22 28L66 12H126L171 28L188 55H6L22 28Z" fill="#ef4444"/>
+    <path d="M68 17H122L145 35H48L68 17Z" fill="#111827"/>
+    <rect x="78" y="27" width="36" height="17" rx="5" fill="#f9fafb"/>
+    <circle cx="43" cy="57" r="20" fill="#111827"/>
+    <circle cx="151" cy="57" r="20" fill="#111827"/>
+    <circle cx="43" cy="57" r="9" fill="#64748b"/>
+    <circle cx="151" cy="57" r="9" fill="#64748b"/>
+    <path d="M95 5V37" stroke="#111827" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <g stroke="#111827" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M672 262L714 222L756 242L804 198L852 224L906 174L984 216"/>
+  </g>
+  <g fill="#ef4444">
+    <circle cx="714" cy="222" r="11"/>
+    <circle cx="804" cy="198" r="11"/>
+    <circle cx="906" cy="174" r="11"/>
+  </g>
+  <g fill="#111827">
+    <rect x="672" y="462" width="34" height="51" rx="6"/>
+    <rect x="720" y="438" width="34" height="75" rx="6" opacity=".72"/>
+    <rect x="768" y="486" width="34" height="27" rx="6" opacity=".46"/>
+    <rect x="900" y="456" width="108" height="14" rx="7" opacity=".5"/>
+    <rect x="900" y="492" width="72" height="14" rx="7" opacity=".35"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700">
+    <text x="900" y="470" fill="#111827" font-size="48">P3</text>
+    <text x="900" y="515" fill="#0f766e" font-size="26">0.82</text>
+  </g>
+  <g fill="#f59e0b">
+    <rect x="984" y="151" width="24" height="24" rx="5"/>
+    <rect x="1016" y="151" width="24" height="24" rx="5" opacity=".75"/>
+    <rect x="984" y="183" width="24" height="24" rx="5" opacity=".75"/>
+    <rect x="1016" y="183" width="24" height="24" rx="5"/>
+  </g>
+  <path d="M576 337H624" stroke="#2563eb" stroke-width="10" stroke-linecap="round"/>
+  <path d="M624 337H672" stroke="#2563eb" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 20"/>
+</svg>
