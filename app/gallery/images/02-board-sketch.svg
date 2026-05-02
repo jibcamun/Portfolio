@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="920" viewBox="0 0 720 920" role="img" aria-labelledby="title desc">
+  <title id="title">Board sketch</title>
+  <desc id="desc">A tall stylized circuit board sketch.</desc>
+  <rect width="720" height="920" fill="#ecfeff"/>
+  <rect x="86" y="86" width="548" height="748" rx="38" fill="#0f766e"/>
+  <g stroke="#99f6e4" stroke-width="12" stroke-linecap="round" fill="none">
+    <path d="M180 210h150v140h132"/>
+    <path d="M438 230h104"/>
+    <path d="M202 610h168v-92h172"/>
+    <path d="M258 730h198"/>
+  </g>
+  <g fill="#f8fafc">
+    <rect x="278" y="388" width="166" height="126" rx="18"/>
+    <rect x="152" y="174" width="72" height="72" rx="12"/>
+    <rect x="496" y="194" width="72" height="72" rx="12"/>
+    <rect x="496" y="576" width="72" height="72" rx="12"/>
+    <circle cx="202" cy="610" r="22"/>
+    <circle cx="258" cy="730" r="22"/>
+  </g>
+</svg>

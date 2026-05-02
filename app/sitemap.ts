@@ -43,6 +43,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/projects`,
       lastModified: new Date().toISOString(),
     },
+    {
+      url: `${baseUrl}/gallery`,
+      lastModified: new Date().toISOString(),
+    },
   ]
 
   return [...routes, ...blogs]

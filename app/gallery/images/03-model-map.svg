@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="820" viewBox="0 0 820 820" role="img" aria-labelledby="title desc">
+  <title id="title">Model map</title>
+  <desc id="desc">A square abstract machine learning model map.</desc>
+  <rect width="820" height="820" fill="#fafafa"/>
+  <circle cx="410" cy="410" r="310" fill="#111827"/>
+  <g stroke="#93c5fd" stroke-width="10" stroke-linecap="round">
+    <path d="M250 300l160 110 160-110"/>
+    <path d="M250 520l160-110 160 110"/>
+    <path d="M410 230v360"/>
+  </g>
+  <g fill="#f9fafb">
+    <circle cx="250" cy="300" r="42"/>
+    <circle cx="570" cy="300" r="42"/>
+    <circle cx="410" cy="410" r="52"/>
+    <circle cx="250" cy="520" r="42"/>
+    <circle cx="570" cy="520" r="42"/>
+  </g>
+</svg>
