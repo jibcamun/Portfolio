@@ -51,17 +51,16 @@ The reward is shaped across the whole trajectory:
 
 ### Mathematical Form
 
-```text
-Reward =
-\begin{cases}
-\sum_{o \in O} \frac{20}{N}(2I[o]-1), & \text{valid segment} \\
-\mathrm{clamp}\left(\frac{30}{N}(\mathrm{score}(o,p_{\text{new}})-\mathrm{score}(o,p_{\text{old}})), -\frac{30}{N}, \frac{30}{N}\right), & \text{valid adjust} \\
-\mathrm{clamp}\left(\frac{50}{N}(L(P_{\text{new}})-L(P_{\text{old}})), -50, 50\right), & \text{valid place} \\
--\frac{20}{N}, & \text{invalid segment} \\
--\frac{30}{N}, & \text{invalid adjust} \\
--\frac{50}{N}, & \text{invalid place}
-\end{cases}
-```
+The reward is computed as a piecewise function:
+
+| Case | Reward |
+| --- | --- |
+| valid `segment` | `sum((20 / N) * (2I[o] - 1))` for each object `o` in `O` |
+| valid `adjust` | `clamp((30 / N) * (score(o, p_new) - score(o, p_old)), -30 / N, 30 / N)` |
+| valid `place` | `clamp((50 / N) * (L(P_new) - L(P_old)), -50, 50)` |
+| invalid `segment` | `-20 / N` |
+| invalid `adjust` | `-30 / N` |
+| invalid `place` | `-50 / N` |
 
 Where:
 - `N` is the number of objects in the episode
@@ -78,9 +77,9 @@ The reward is meaningful across the trajectory, not only at the terminal step. A
 
 ## Links
 
-Hugging Face Repository: https://huggingface.co/spaces/Jibrann/sorter
-Hugging Face Space: https://jibrann-sorter.hf.space
-GitHub Repository: https://github.com/jibcamun/The-Sorter-Project
+- [Hugging Face Repository](https://huggingface.co/spaces/Jibrann/sorter)
+- [Hugging Face Space](https://jibrann-sorter.hf.space)
+- [GitHub Repository](https://github.com/jibcamun/The-Sorter-Project)
 
 ## Related Work
 
