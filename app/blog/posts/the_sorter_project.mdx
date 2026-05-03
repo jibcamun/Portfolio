@@ -53,14 +53,12 @@ The reward is shaped across the whole trajectory:
 
 The reward is computed as a piecewise function:
 
-| Case | Reward |
-| --- | --- |
-| valid `segment` | `sum((20 / N) * (2I[o] - 1))` for each object `o` in `O` |
-| valid `adjust` | `clamp((30 / N) * (score(o, p_new) - score(o, p_old)), -30 / N, 30 / N)` |
-| valid `place` | `clamp((50 / N) * (L(P_new) - L(P_old)), -50, 50)` |
-| invalid `segment` | `-20 / N` |
-| invalid `adjust` | `-30 / N` |
-| invalid `place` | `-50 / N` |
+- Valid `segment`: `sum((20 / N) * (2I[o] - 1))` for each object `o` in `O`
+- Valid `adjust`: `clamp((30 / N) * (score(o, p_new) - score(o, p_old)), -30 / N, 30 / N)`
+- Valid `place`: `clamp((50 / N) * (L(P_new) - L(P_old)), -50, 50)`
+- Invalid `segment`: `-20 / N`
+- Invalid `adjust`: `-30 / N`
+- Invalid `place`: `-50 / N`
 
 Where:
 - `N` is the number of objects in the episode
