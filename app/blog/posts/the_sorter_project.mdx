@@ -1,0 +1,91 @@
+---
+title: 'The Sorter Project: Object Placement With AI Agents'
+publishedAt: '2024-04-08'
+summary: 'An environment to make AI agents learn how to identify, place and adjust the position of objects in a virtual environment which are scattered in a random fashion.'
+---
+
+# The Sorter Project
+
+## The Purpose
+We came up with this idea, keeping in mind its application in factories, warehouses and storage facilities. _(and even your coffee table!)_
+
+`sorter` is an OpenEnv environment for warehouse slotting and reslotting, in both macro and micro slotting aspects. It models three tasks that human warehouse operators and inventory planners actually perform, with an aim to possibly automate the process:
+
+1. identify incoming items from known inventory metadata
+2. reposition one item to a better legal slot
+3. reorganize an entire layout to improve storage quality
+
+The environment is designed for agent evaluation rather than low level robotics. Collision checks, support constraints, bounds, and stackability are enforced by the environment, while the agent is evaluated on recognition, layout decisions, and improvement over time.
+
+## What does this bring to the table?
+### **The Industrial Perspective / Micro Perspective**
+- Companies spend milllions if not billions on establishing, maintaining and organisising warehouses and storage facilities, and in a densely populated country like India with increasing demand for land and with the surging property prices efficient storage and orgsation becomes the ***need of the hour***, leading to the demand for an environment or an agent that can help companies and organisations and provide them with ways for the maximum efficient and logical storage of their "objects".
+- The environments and agents that specialise in full fledged identifying, sorting, stacking and organising of objects or warehouse material are few in number, and ***we are here to fill that gap***.
+
+### **The Populational Perspective / Macro Persepective**
+With increase in population causing decrease of 'Open Spaces' it becomes extremely important to **build societies and localities that can cater to a huge chunk of population** and in such a case, The Sorter Project though being mainly built for industrial application, becomes an extremely useful tool that allows proper space utilisation to accomatodate more people whilst taking minimum space. _(so in the near future we might not have to shift to mars)_
+
+## Environment Summary
+
+The world state is a 3D grid:
+
+- `current_grid`: current occupancy of the warehouse volume
+- `weighted_grid`: a dense preference field that defines which placements are more valuable
+- `objects_present`: ground-truth object placements, exposed selectively by task
+
+Importand Decisions substantiated by reasons:
+- We have designed our environment to simulate a warehouse or any space for that matter as a three dimensional grid, although not an entirely accurate representation, most companies like [NVIDIA](https://www.nvidia.com/en-in/), [Siemens](https://www.siemens.com/en-us/), [Dassault Systèmes](https://www.3ds.com/), [Microsoft](https://www.microsoft.com/en-in) and [IBM](https://www.ibm.com/in-en) use similiar or near same systems as recorded in [Warehouse Digital Twins](https://docs.nvidia.com/learning/physical-ai/assembling-digital-twins/latest/index.html) by [NVIDIA](https://www.nvidia.com/en-in/) and [Supply Chain 2.0](https://www.microsoft.com/en-us/industry/blog/manufacturing-and-mobility/2026/03/24/supply-chain-2-0-how-microsoft-is-powering-simulations-ai-agents-and-physical-ai/?msockid=2baed25235d468720632c43e34b669fd) by [Microsoft](https://www.microsoft.com/en-in). However these designs are mostly used by the massive coorporations for inventory management, automations and other related aspects of warehouse management, and we take inspiration from their logic to build something novel.
+- To achieve our goal we created two grid namely, the main grid called `current_grid` which contains a few objects randomly initialised to simulate objects present in the warehouse and `weighted_grid`, which is a duplicate of the main grid made in order to introduce noise and indicate the preference of placement.
+- Weighted grid is exposed because it defines what "better" means, but not the "optimal" positions of objects in the warehouse. This preserves the optimization problem while still making the reward landscape quite interpretable.
+- We intentionally expose only small, task relevant slices of state, in order to provide better context for the model to perform each action, without exposing vital "ground truths" and destroying the reinforcement learning aspect of it.
+- The environment keeps `objects_present` as internal truth, but reveals it selectively depending on the task. It is revealed in `adjust` and `place` functions, in order to ensure that the ability of the tasks of functions to run independently is not compromised. 
+- We return the latest scalar reward together with textual feedback and advisory messages. This was a choice made to support both the reinforcement learning logic and help the LLM in iterative correction.
+- Validity constraints such as bounds, non-overlap, stackability, and support are enforced inside the environment instead of delegated to the agent. This keeps the task focused on decision quality and finding the best "optimal" position, rather than simulating low level frivolous tasks such as obstacle prevention, etc, which does not fit our pursuit.
+
+The reward is shaped across the whole trajectory:
+
+- partial credit for correct segmentation
+- incremental reward for better local moves in `adjust`
+- incremental reward for improving the total layout in `place`
+- penalties for malformed, illegal, destructive, or clearly unhelpful actions
+
+## Reward Function
+
+### Mathematical Form
+
+$$
+Reward =
+\begin{cases}
+\sum_{o \in O} \frac{20}{N}(2I[o]-1), & \text{valid segment} \\
+\mathrm{clamp}\left(\frac{30}{N}(\mathrm{score}(o,p_{\text{new}})-\mathrm{score}(o,p_{\text{old}})), -\frac{30}{N}, \frac{30}{N}\right), & \text{valid adjust} \\
+\mathrm{clamp}\left(\frac{50}{N}(L(P_{\text{new}})-L(P_{\text{old}})), -50, 50\right), & \text{valid place} \\
+-\frac{20}{N}, & \text{invalid segment} \\
+-\frac{30}{N}, & \text{invalid adjust} \\
+-\frac{50}{N}, & \text{invalid place}
+\end{cases}
+$$
+
+Where:
+- `N` is the number of objects in the episode
+- `score(obj, pos)` is the mean `weighted_grid` value covered by the object at that position
+- `L(layout)` is the total layout score across all objects
+
+### Reward Interpretation
+
+- `segment` rewards exact object identification and penalizes wrong or malformed submissions
+- `adjust` rewards local score improvement and penalizes invalid or harmful moves
+- `place` rewards global layout improvement and penalizes illegal full-layout proposals
+
+The reward is meaningful across the trajectory, not only at the terminal step. Agents can detect partial progress, plateauing, and regressions from the reward stream and advisory feedback.
+
+## Links
+
+Hugging Face Repository: https://huggingface.co/spaces/Jibrann/sorter
+Hugging Face Space: https://jibrann-sorter.hf.space
+GitHub Repository: https://github.com/jibcamun/The-Sorter-Project
+
+## Related Work
+
+- [Jumanji](https://github.com/instadeepai/jumanji): RL environments for structured decision-making and optimization
+- [miniRL](https://proxyapps.exascaleproject.org/app/minirl/): lightweight RL experimentation framework
+- [BabyAI](https://arxiv.org/abs/1810.08272): benchmark for learning complex behavior from simpler sub-tasks
