@@ -53,7 +53,7 @@ The reward is shaped across the whole trajectory:
 
 ### Mathematical Form
 
-$$
+```text
 Reward =
 \begin{cases}
 \sum_{o \in O} \frac{20}{N}(2I[o]-1), & \text{valid segment} \\
@@ -63,7 +63,7 @@ Reward =
 -\frac{30}{N}, & \text{invalid adjust} \\
 -\frac{50}{N}, & \text{invalid place}
 \end{cases}
-$$
+```
 
 Where:
 - `N` is the number of objects in the episode
