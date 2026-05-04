@@ -1,12 +1,81 @@
 import { getProjects } from 'app/projects/utils'
 
-export function Projects({ limit }: { limit?: number }) {
-  let projects = getProjects().slice(0, limit)
+function ArrowIcon() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="shrink-0"
+    >
+      <path
+        d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function ProjectLink({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-2 text-neutral-900 transition-colors hover:text-neutral-600 dark:text-neutral-100 dark:hover:text-neutral-300"
+    >
+      <ArrowIcon />
+      <span>{children}</span>
+    </a>
+  )
+}
+
+function matchesQuery(project: ReturnType<typeof getProjects>[number], query: string) {
+  let normalizedQuery = query.trim().toLowerCase()
+
+  if (!normalizedQuery) {
+    return true
+  }
+
+  let searchableText = [
+    project.metadata.title,
+    project.metadata.description,
+    project.metadata.customLabel,
+    project.slug,
+    project.content,
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+
+  return searchableText.includes(normalizedQuery)
+}
+
+export function Projects({
+  limit,
+  query = '',
+}: {
+  limit?: number
+  query?: string
+}) {
+  let projects = getProjects()
+    .filter((project) => matchesQuery(project, query))
+    .slice(0, limit)
 
   if (!projects.length) {
     return (
       <p className="text-neutral-600 dark:text-neutral-400">
-        More projects coming soon.
+        {query
+          ? `No projects found for "${query}".`
+          : 'More projects coming soon.'}
       </p>
     )
   }
@@ -34,34 +103,19 @@ export function Projects({ limit }: { limit?: number }) {
               project.metadata.custom) && (
               <div className="mt-3 flex flex-wrap gap-3 text-sm">
                 {project.metadata.github && (
-                  <a
-                    href={project.metadata.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-900 underline decoration-neutral-400 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-100 dark:decoration-neutral-600 dark:hover:text-neutral-300"
-                  >
+                  <ProjectLink href={project.metadata.github}>
                     GitHub
-                  </a>
+                  </ProjectLink>
                 )}
                 {project.metadata.link && (
-                  <a
-                    href={project.metadata.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-900 underline decoration-neutral-400 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-100 dark:decoration-neutral-600 dark:hover:text-neutral-300"
-                  >
+                  <ProjectLink href={project.metadata.link}>
                     Live
-                  </a>
+                  </ProjectLink>
                 )}
                 {project.metadata.custom && (
-                  <a
-                    href={project.metadata.custom}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-900 underline decoration-neutral-400 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-100 dark:decoration-neutral-600 dark:hover:text-neutral-300"
-                  >
+                  <ProjectLink href={project.metadata.custom}>
                     {project.metadata.customLabel || 'More'}
-                  </a>
+                  </ProjectLink>
                 )}
               </div>
             )}
@@ -115,34 +169,19 @@ export function ProjectPosts({
               project.metadata.custom) && (
               <div className="mt-2 flex flex-wrap gap-3 text-sm">
                 {project.metadata.github && (
-                  <a
-                    href={project.metadata.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-900 underline decoration-neutral-400 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-100 dark:decoration-neutral-600 dark:hover:text-neutral-300"
-                  >
+                  <ProjectLink href={project.metadata.github}>
                     GitHub
-                  </a>
+                  </ProjectLink>
                 )}
                 {project.metadata.link && (
-                  <a
-                    href={project.metadata.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-900 underline decoration-neutral-400 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-100 dark:decoration-neutral-600 dark:hover:text-neutral-300"
-                  >
+                  <ProjectLink href={project.metadata.link}>
                     Live
-                  </a>
+                  </ProjectLink>
                 )}
                 {project.metadata.custom && (
-                  <a
-                    href={project.metadata.custom}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-900 underline decoration-neutral-400 underline-offset-4 transition-colors hover:text-neutral-600 dark:text-neutral-100 dark:decoration-neutral-600 dark:hover:text-neutral-300"
-                  >
+                  <ProjectLink href={project.metadata.custom}>
                     {project.metadata.customLabel || 'More'}
-                  </a>
+                  </ProjectLink>
                 )}
               </div>
             )}

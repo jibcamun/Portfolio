@@ -1,8 +1,34 @@
 import Link from 'next/link'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 
-export function BlogPosts({ limit }: { limit?: number }) {
+function matchesQuery(post: ReturnType<typeof getBlogPosts>[number], query: string) {
+  let normalizedQuery = query.trim().toLowerCase()
+
+  if (!normalizedQuery) {
+    return true
+  }
+
+  let searchableText = [
+    post.metadata.title,
+    post.metadata.summary,
+    post.slug,
+    post.content,
+  ]
+    .join(' ')
+    .toLowerCase()
+
+  return searchableText.includes(normalizedQuery)
+}
+
+export function BlogPosts({
+  limit,
+  query = '',
+}: {
+  limit?: number
+  query?: string
+}) {
   let allBlogs = getBlogPosts()
+    .filter((post) => matchesQuery(post, query))
     .sort((a, b) => {
       if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
         return -1
@@ -14,7 +40,7 @@ export function BlogPosts({ limit }: { limit?: number }) {
   if (!allBlogs.length) {
     return (
       <p className="text-neutral-600 dark:text-neutral-400">
-        More writing coming soon.
+        {query ? `No posts found for "${query}".` : 'More writing coming soon.'}
       </p>
     )
   }
