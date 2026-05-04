@@ -1,12 +1,23 @@
+import Image from 'next/image'
 import { BlogPosts } from 'app/components/posts'
 import { ProjectPosts } from 'app/components/projects'
 
 export default function Page() {
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        Jibran Noorshah
-      </h1>
+      <div className="mb-8 flex items-center gap-4">
+        <Image
+          src="/images/profile.jpeg"
+          alt="Jibran Noorshah"
+          width={88}
+          height={88}
+          priority
+          className="h-[88px] w-[88px] rounded-full object-cover"
+        />
+        <h1 className="text-2xl font-semibold tracking-tighter">
+          Jibran Noorshah
+        </h1>
+      </div>
       <p className="mb-4">
         {`I'm a tech enthusiast and developer who finds unmatched glory in
         reading research papers and getting lost in a pile of math problems.
